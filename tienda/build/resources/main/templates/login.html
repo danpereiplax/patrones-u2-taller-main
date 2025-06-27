@@ -4,7 +4,7 @@
 <body>
 	<div id="cuerpo">
 		
-		<form action="" method="post" class="mt-5 mb-5 w-50 mx-auto bg-light p-3 border">
+		<form th:action="@{/ingresar}" method="post" class="mt-5 mb-5 w-50 mx-auto bg-light p-3 border">
 			
 			<div class="text-danger" data-th-if="${param.error}">Usuario o contraseña incorrecta.</div>
 			<div data-th-if="${param.logout}">Has cerrado sesión.</div>

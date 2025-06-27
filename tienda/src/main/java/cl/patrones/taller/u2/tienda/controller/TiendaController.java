@@ -35,13 +35,13 @@ public class TiendaController {
 			@PathVariable(name = "categoriaId") Long categoriaId,
 			@PathVariable(name = "slug") String slug,
 			Model model) {
-		
+
 		List<Aviso> avisos = avisoService.getAvisosPorCategoria(categoriaId);
 		Categoria categoria = categoriaService.getCategoriaPorId(categoriaId).orElse(null);
-		
+
 		model.addAttribute("avisos", avisos);
 		model.addAttribute("categoria", categoria);
-		
+
 		return "categoria";
 	}
 

@@ -16,11 +16,9 @@ import cl.patrones.taller.u2.catalogo.repository.CategoriaRepository;
 public class AvisoServiceImpl implements AvisoService {
 
     private final ProductoRepository productoRepository;
-   
 
     public AvisoServiceImpl(ProductoRepository productoRepository, CategoriaRepository categoriaRepository) {
         this.productoRepository = productoRepository;
-        
     }
 
     @Override
@@ -39,11 +37,19 @@ public class AvisoServiceImpl implements AvisoService {
         List<Aviso> avisos = new ArrayList<>();
         for (Producto producto : productoRepository.findAll()) {
             Categoria categoria = producto.getCategoria();
+
+            System.out.println("Producto: " + producto.getNombre() + 
+                ", Categoria ID: " + (categoria != null ? categoria.getId() : "null"));
+
             if (categoria != null && categoria.getId().equals(categoriaId)) {
                 int stockTotal = producto.getStocks().stream().mapToInt(Stock::getCantidad).sum();
                 avisos.add(Aviso.desdeProducto(producto, stockTotal, categoria));
+                System.out.println("✓ Agregado: " + producto.getNombre());
+            } else {
+                System.out.println("✗ Omitido: " + producto.getNombre());
             }
         }
+        System.out.println("Total avisos por categoría " + categoriaId + ": " + avisos.size());
         return avisos;
     }
 }

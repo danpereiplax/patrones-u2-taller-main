@@ -19,6 +19,7 @@ public class Producto {
     private Long costo;
 
     @ManyToOne
+	@JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)

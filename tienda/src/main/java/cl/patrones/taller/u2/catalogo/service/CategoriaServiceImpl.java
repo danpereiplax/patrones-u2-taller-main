@@ -11,21 +11,25 @@ import cl.patrones.taller.u2.catalogo.repository.CategoriaRepository;
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
 
-	private CategoriaRepository repository;
-	
-	public CategoriaServiceImpl(CategoriaRepository repository) {
-		super();
-		this.repository = repository;
-	}
-	
-	@Override
-	public List<Categoria> getCategorias() {
-		return repository.findAll();
-	}
+    private CategoriaRepository repository;
 
-	@Override
-	public Optional<Categoria> getCategoriaPorId(Long id) {
-		return repository.findById(id);
-	}
-	
+    public CategoriaServiceImpl(CategoriaRepository repository) {
+        super();
+        this.repository = repository;
+    }
+
+    @Override
+    public List<Categoria> getCategorias() {
+        return repository.findAll();
+    }
+
+    @Override
+    public Optional<Categoria> getCategoriaPorId(Long id) {
+        return repository.findById(id);
+    }
+
+    @Override
+    public List<Categoria> obtenerCategoriasRaiz() {
+        return repository.findByPadreIsNull();
+    }
 }
